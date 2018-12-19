@@ -1,0 +1,52 @@
+#competitors {
+    border-right: solid 1px #e7e7e7;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    overflow-y: scroll;
+    height: 442px;
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+  }
+  
+  h2 {
+    font-size: 18px;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 700;
+    line-height: 24px;
+  }
+  
+  #competitors li {
+    padding: 10px 0;
+    border-top: 1px solid #8c8c8c;
+    display: block;
+    height: 50px;
+  }
+  
+  #competitors li img.status {
+    width: 29px;
+    justify-self: end;
+    float: right;
+  }
+  
+  #competitors li img {
+    align-self: center;
+  }
+
+  .competitor {
+      cursor: pointer;
+  }
+  .competitor .brand-logo{
+      width: 24%;
+      float: left;
+  }
+  .competitor .brand-name {
+      width: 56%;
+      float: left;
+  }
+  .competitor .status-image {
+      width: 20%;
+      float: left;
+  }

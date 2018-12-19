@@ -1,0 +1,13 @@
+#bookmark{
+    width: 100%;
+    display: grid;
+    justify-items: end;
+    position: absolute;
+    top: 0;
+    cursor: pointer;
+}
+
+#bookmark img{
+    width: 44px;
+    margin-right: 55px;
+}
