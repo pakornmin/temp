@@ -37,7 +37,9 @@ class Home extends Component {
             </div>
 
             <div className="company-logo">
-              <img src={`https://logo.clearbit.com/${this.politicalData.brandDomain}?size=256`}/>
+              <div class="logo-box">
+                <img src={`${this.politicalData.logoUrl}`}/>
+              </div>
             </div>
           </div>
 
@@ -70,7 +72,6 @@ class Home extends Component {
             {this.employeeTotalGiven === 0 && <div>No EMPLOYEE</div> }  
           </div>
         </section>
-        <div className="clearbitText">Logos provided by Clearbit</div>
      </div>
     );
   }

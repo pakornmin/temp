@@ -39,7 +39,7 @@ class SimilarStore extends Component {
                         <div className="competitor" onClick={() => this.onCompanyLinkClick(similarStore.affiliateLink)}>
                             <li>
                                 <div className="brand-logo">
-                                    <img src={`https://logo.clearbit.com/${similarStore.brandDomain}?size=56`}/>
+                                    <img src={`${similarStore.logoUrl}`}/>
                                 </div>
                                 <div className="brand-name">
                                     {similarStore.name}
@@ -52,7 +52,6 @@ class SimilarStore extends Component {
                     </Fragment>
                 ))} 
             </ul>
-            <div className="clearbitText">Logos provided by Clearbit</div>  
         </section>
     );
   }
