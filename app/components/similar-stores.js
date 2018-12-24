@@ -41,9 +41,7 @@ class SimilarStore extends Component {
                                 <div className="brand-logo">
                                     <img src={`${similarStore.logoUrl}`}/>
                                 </div>
-                                <div className="brand-name">
-                                    {similarStore.name}
-                                </div>
+                               
                                 <div className="status-image">
                                     <img src={`static/images/${this.statusMap[similarStore.shopStatus]}`} alt="" className="status"/>
                                 </div>

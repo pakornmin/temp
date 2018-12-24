@@ -20,13 +20,13 @@ class Ribbon extends Component {
      const shopStatus = this.props.politicalData.shopStatus;
       let iconPath = '';
       if(shopStatus === 'NO'){
-					iconPath = "static/images/bookmark-red.png";
+					iconPath = "static/images/logo-bad.png";
 				}
 				else if(shopStatus === 'OK'){
-					iconPath = "static/images/bookmark-purple.png";
+					iconPath = "static/images/logo-ok.png";
 				}
 				else if(shopStatus === 'YES') {
-					iconPath = "static/images/bookmark-blue.png";
+					iconPath = "static/images/logo-good.png";
 				}
     return (
        <div id="bookmark" onClick={this.onRibbonButtonClick}>

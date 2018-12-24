@@ -33,24 +33,21 @@ h2 {
 
 #competitors li img {
   align-self: center;
-  width: 90%;
+  width: 50%;
 }
 
 .competitor {
     cursor: pointer;
 }
 .competitor .brand-logo{
-  width: 24%;
+  width: 50%;
   height: 60px;
   float: left;
   display: grid;
   align-items: center;
 }
-.competitor .brand-name {
-    width: 56%;
-    float: left;
-}
+
 .competitor .status-image {
-    width: 20%;
-    float: left;
+    width: 50%;
+    float: right;
 }
