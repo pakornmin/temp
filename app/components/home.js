@@ -37,7 +37,7 @@ class Home extends Component {
             </div>
 
             <div className="company-logo">
-              <div class="logo-box">
+              <div className="logo-box">
                 <img src={`${this.politicalData.logoUrl}`}/>
               </div>
             </div>

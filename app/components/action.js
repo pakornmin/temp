@@ -15,13 +15,13 @@ class Action extends Component {
     return (
       <section id="actions">
         {this.props.actionList.map((action, i) => (
-          <a href="#" onClick={() => this.onActionClick(action.link,action.label)} key={i} >
+          <div className="action" onClick={() => this.onActionClick(action.link,action.label)} key={i} >
             <div className="icon"><img className="action-icon" src={action.imageUrl} alt=""/></div>
             <div className="details">
               <div className="title">{action.label}</div>
               <p>{action.description}</p>
             </div>
-          </a>
+          </div>
         ))}
     </section>
     );

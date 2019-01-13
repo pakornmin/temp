@@ -38,7 +38,8 @@ window.openLinkInNewTabAndClose = function (url){
     });
 }
 window.openLinkNewTab = function (url){
-    chrome.tabs.create({active:true , url : url});
+    // chrome.tabs.create({active:true , url : url});
+    chrome.runtime.sendMessage( {"command":"OPEN_LINK_NEW_TAB","url":url});
 }
 window.openIframePopup = function (url){
     chrome.runtime.sendMessage( {"command":"OPEN_IFRAME_POPUP"});

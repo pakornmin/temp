@@ -93,6 +93,10 @@ const Background = {
 				Storage.setLastShownTimeActions();	
 				return true;
 			}
+			case "OPEN_LINK_NEW_TAB" : {
+				chrome.tabs.create({active:true , url : request.url});
+				return true;
+			}
 		}
 	},
 	randomUUID: function(){

@@ -22,7 +22,7 @@ class Footer extends Component {
   }
   
   render() {
-    const brandImage = this.props.home ? 'static/images/brands-selected.PNG':'static/images/brands.PNG';
+    const brandImage = this.props.home ? 'static/images/brands-selected.png':'static/images/brands.png';
     const compImage = this.props.similarStory ? 'static/images/competitors-selected.png':'static/images/competitors.png';
     const actionImage = this.props.action ? 'static/images/actions-selected.png' : 'static/images/actions.png';
     return (
