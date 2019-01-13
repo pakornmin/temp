@@ -89,10 +89,6 @@ const Background = {
 				Storage.setSettingsCheckboxValue(request.checkboxName, request.value);
 				return true;
 			}
-			case "SET_ACTION_LAST_SHOWN_TIME" : {
-				Storage.setLastShownTimeActions();	
-				return true;
-			}
 			case "OPEN_LINK_NEW_TAB" : {
 				chrome.tabs.create({active:true , url : request.url});
 				return true;
