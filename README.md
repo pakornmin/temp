@@ -7,8 +7,10 @@ ps-extesnion stands for Progressive Shopper extension. ps-extension is browser e
 * Run command ```npm install```
 
 ## Genererate Extension
-* To generate extension code from source code run command ```npm run build```. This will generate directory named ```build```, which is the code for extension.
+* To generate extension code from source code run command ```npm run build```. This will generate directory named ```build```, which is the exact copy of extension.
+## Publishing Extension
 * Create zip file having content from build directory. Make sure that that zip file directly contains manifest.json and other files/directories directly inside the zip file.
+* This zip file can be published in chrome/firecfox.
 
 ## Installing extension locally
   - Chrome
