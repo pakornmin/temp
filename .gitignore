@@ -2,5 +2,4 @@
 **/node_modules
 build.crx
 build.pem
-package-lock.json
 .idea
