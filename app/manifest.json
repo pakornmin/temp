@@ -24,7 +24,6 @@
     "background": {
         "scripts": [
             "static/js/library/jquery-3.2.1.min.js",
-            "static/js/library/moment.js",
             "config.js",
             "static/js/eventPage.js"
         ]
