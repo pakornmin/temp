@@ -45,7 +45,7 @@ const ContentScript = {
 		return 'position:fixed;top:0;right:0px;display:block;width:360px;height:610px;z-index:99999999 !important;border-width: 1px !important;';
 	},
 	getRibbonIframeStyle: function(){
-		return 'position:fixed;float:right;top:0;right:0px;border: 0;z-index:99999999 !important';
+		return 'position:fixed;float:right;top:0;right:40px;border: 0;width:80px;height:40px;z-index:99999999 !important';
 	}
 }
 
