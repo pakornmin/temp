@@ -71,6 +71,10 @@ class Home extends Component {
             }
             {this.employeeTotalGiven === 0 && <div>No EMPLOYEE</div> }  
           </div>
+          <div class="foxSection">
+            <img src="./static/images/warn.png" alt=""/>
+            <p>Fox News Sponsor</p>
+          </div>
         </section>
      </div>
     );
