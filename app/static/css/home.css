@@ -201,3 +201,18 @@ ul.board{
     padding-right: 10px;
   }
 
+  .foxSection{
+    padding-top: 10px;
+    margin-top: 10px;
+    border-top: 1px solid #8c8c8c;
+    font-size: 14px;
+    display: grid;
+    grid-template-columns: 30px auto;
+    align-items: center;
+  }
+
+  .foxSection img{
+    width: 20px;
+    float: left;
+    vertical-align: center;
+  }
