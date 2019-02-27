@@ -33,8 +33,8 @@ h2 {
 
 #competitors li img {
   align-self: center;
-  width: 50%;
-  max-height: 90%;
+  max-height: 65%;
+  max-width: 100%;
 }
 
 .competitor {
