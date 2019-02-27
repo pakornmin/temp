@@ -14,6 +14,7 @@ class Home extends Component {
         this.pacTotalGiven = this.politicalData.pacTotalGiven;
         this.employeeTotalGiven = this.politicalData.employeeTotalGiven;
         this.totalGiven = this.politicalData.totalGiven;
+        this.foxSponsor = this.politicalData.foxSponsor;
 
         this.statusMap = {
           YES:'good.png',
@@ -71,10 +72,12 @@ class Home extends Component {
             }
             {this.employeeTotalGiven === 0 && <div>No EMPLOYEE</div> }  
           </div>
-          <div class="foxSection">
-            <img src="./static/images/warn.png" alt=""/>
-            <p>Fox News Sponsor</p>
-          </div>
+          {this.foxSponsor && 
+            <div class="foxSection">
+              <img src="./static/images/warn.png" alt=""/>
+              <p>Fox News Sponsor</p>
+            </div>
+          }
         </section>
      </div>
     );

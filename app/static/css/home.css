@@ -1,106 +1,11 @@
-/*
-#home {
-    padding-top: 20px;
-}
-.company-name{
-    display: grid;
-    grid-template-columns: 30% 60%;
-    grid-gap: 5%;
-    text-align: left;
-}
-
-.photo img{
-    width: 100%;
-}
-
-.company-name p{
-    margin: 0;
-    font-size: 14px;
-    text-transform: uppercase;
-}
-
-.company-name p.title{
-    color: #34aae0;
-    font-size: 16px;
-    font-weight: 600;
-}
-
-.numbers ul{
-    list-style-type: none;
-    display: grid;
-    margin: 0;
-    padding: 0;
-}
-
-.numbers ul li{
-    text-align: center;
-    color: white;
-    font-size: 12px;
-    padding: 6px 0;
-}
-
-.numbers ul li:nth-child(1){
-    background: #34aae0;
-    border-top-left-radius: 6px;
-    border-bottom-left-radius: 6px;
-}
-
-.numbers ul li:nth-child(2){
-    background: #c70100;
-    color: black;
-    border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px;
-}
-
-.numbers ul.employee li:nth-child(2){
-    border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px
-}
-
-p.blue{
-    color: #34aae0;
-}
-
-.numbers p{
-    margin: 10px 0 5px 0;
-    font-size: 16px;
-    text-align: left;
-    text-transform: uppercase;
-}
-
-ul.overall{
-    grid-template-columns: var(--overall-contribution);
-}
-
-ul.ceo{
-    grid-template-columns: var(--ceo-contribution);
-}
-
-ul.employee{
-    grid-template-columns: var(--employee-contribution);
-}
-
-ul.pac{
-    grid-template-columns: var(--pac-contribution);
-}
-
-ul.board{
-    grid-template-columns: var(--pac-contribution);
-}
-*/
-
-
-
-
-
-
 #brand {
     border-right: solid 1px #e7e7e7;
     box-sizing: border-box;
-    padding-bottom: 47px;
+    padding-bottom: 5px;
     padding-top: 20px;
     padding-left: 20px;
     padding-right: 20px;
+    height: 442px;
   }
   
   .company-info {

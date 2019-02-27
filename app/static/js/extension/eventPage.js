@@ -117,6 +117,7 @@ chrome.runtime.onInstalled.addListener(function(details){
       
     }
 });
+chrome.runtime.setUninstallURL('https://progressiveshopper.com/uninstall/');
 chrome.pageAction.onClicked.addListener(function(tab) { 
 	chrome.tabs.sendMessage(tab.id, {"command":"INVOKE_INIT", autoLoad: false, forceLoad: true});
 });
