@@ -46,31 +46,31 @@ class Home extends Component {
 
           <div id="contributions">
             <p>% Overall Contributions to Democrats</p>
-            {this.totalGiven !== 0 &&
+            {this.totalGiven &&
               <ul id="political">
                 <li>{this.percentTotalDemocrats}%</li>
                 <li>{100-this.percentTotalDemocrats}%</li>
               </ul>
             }
-            {this.totalGiven === 0 && <div>No DATA</div> }
+            {!this.totalGiven && <div>No DATA</div> }
 
             <p>% PAC Contributions to Democrats</p>
-            {this.pacTotalGiven !== 0 &&
+            {this.pacTotalGiven &&
               <ul id="pac">
                 <li>{this.percentPacToDemocrats}%</li>
                 <li>{100-this.percentPacToDemocrats}%</li>
               </ul>
             }
-            {this.pacTotalGiven === 0 && <div>NO PAC</div> }  
+            {!this.pacTotalGiven  && <div>NO PAC</div> }  
 
             <p>% Employee Contributions to Democrats</p>
-            {this.employeeTotalGiven !== 0 && 
+            {this.employeeTotalGiven && 
               <ul id="employee">
                 <li>{this.percentEmployeeToDemocrats}%</li>
                 <li>{100-this.percentEmployeeToDemocrats}%</li>
               </ul>
             }
-            {this.employeeTotalGiven === 0 && <div>No EMPLOYEE</div> }  
+            {!this.employeeTotalGiven && <div>No EMPLOYEE</div> }  
           </div>
           {this.foxSponsor && 
             <div class="foxSection">
