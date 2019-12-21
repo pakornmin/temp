@@ -85,6 +85,10 @@ const Background = {
 				chrome.tabs.sendMessage(sender.tab.id, {"command":"OPEN_IFRAME_POPUP"});
 				return true;
 			}
+			case "RESIZE_HEIGHT_IFRAME" : {
+				chrome.tabs.sendMessage(sender.tab.id, request);
+				return true;
+			}
 			case "SET_SETTINGS_CHECKBOX_VALUE" : {
 				Storage.setSettingsCheckboxValue(request.checkboxName, request.value);
 				return true;

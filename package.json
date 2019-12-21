@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npm run clean && webpack",
     "start": "webpack-dev-server",
-    "clean": "node -e require('fs-extra').emptyDirSync('build')"
+    "clean": "rm -r build"
   },
   "dependencies": {
     "react": "^16.2.0",

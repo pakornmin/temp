@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import 'static/css/common.css';
 import 'static/css/home.css';
 import analytics from 'helpers/analytics.js'
+import Issues from 'components/issues'
 class Home extends Component {
   constructor(props) {
         super(props);
@@ -14,7 +15,6 @@ class Home extends Component {
         this.pacTotalGiven = this.politicalData.pacTotalGiven;
         this.employeeTotalGiven = this.politicalData.employeeTotalGiven;
         this.totalGiven = this.politicalData.totalGiven;
-        this.foxSponsor = this.politicalData.foxSponsor;
 
         this.statusMap = {
           YES:'good.png',
@@ -29,6 +29,7 @@ class Home extends Component {
   render() {
     return (
       <div>
+        <Issues issueList={this.politicalData.issueList}></Issues>
         <section id="brand">
           <p>{this.politicalData.brandDomain}</p>
           <div className="company-info">
@@ -72,10 +73,10 @@ class Home extends Component {
             }
             {!this.employeeTotalGiven && <div>No EMPLOYEE</div> }  
           </div>
-          {this.foxSponsor && 
+          {this.sponsorText && 
             <div class="foxSection">
               <img src="./static/images/warn.png" alt=""/>
-              <p>Fox News Sponsor</p>
+              <p>this.sponsorText</p>
             </div>
           }
         </section>

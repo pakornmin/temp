@@ -1,13 +1,57 @@
 #bookmark{
     width: 100%;
     display: grid;
-    justify-items: end;
     position: absolute;
     top: 0;
     cursor: pointer;
 }
 
-#bookmark img{
-    width: 75px;
-    margin-right: 55px;
+.bookmark-logo img{
+    width: 60px;
+    height: 55px;
+}
+.bookmark-issues {
+    background: white;
+    padding: 5px;
+    margin-top: -5px;
+}
+.bookmark-issues ul{
+    list-style-type: none;
+}
+.bookmark-text{
+    height: 45px;
+    color: white;
+    width: 110px;
+    float: right;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 10px;
+}
+.bookmark-text span{
+    font-size: 12px;
+    font-weight: bold;
+}
+.bookmark-logo{
+    float: left;
+}
+.background-blue {
+    background: #2D65D8;
+}
+.background-red {
+    background: #EB3223;
+}
+.background-purple {
+    background: #9462D2;
+}
+.issue-text {
+    font-size: 12px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+    font-weight: 10px;
+}
+.issue-text img{
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+    float: left;
 }
