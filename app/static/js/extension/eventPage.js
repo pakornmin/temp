@@ -47,9 +47,7 @@ const Background = {
 					tabId: sender.tab.id,
 	  				path : iconPath
 				});
-				if(request.autoLoad && !settingsCheckboxValues.settingsCheckboxValues.notifyActionsCheckbox){
-					return false;
-				}
+				
 				Background.tabWiseData[sender.tab.id] = Background.tabWiseData[sender.tab.id] || {};
 				Background.tabWiseData[sender.tab.id].data = $.extend(serverData, settingsCheckboxValues);
 				chrome.pageAction.show(sender.tab.id);

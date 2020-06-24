@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npm run clean && webpack",
     "start": "webpack-dev-server",
-    "clean": "rm -r build"
+    "clean": "rmdir /s /q build"
   },
   "dependencies": {
     "react": "^16.2.0",
