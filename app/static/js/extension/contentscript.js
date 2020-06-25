@@ -45,10 +45,7 @@ const ContentScript = {
 		return 'position:fixed;top:0;right:0px;display:block;width:360px;height:610px;z-index:99999999 !important;border-width: 1px !important;';
 	},
 	getRibbonIframeStyle: function(){
-		return 'position:fixed;float:right;top:0;right:40px;border: 0;width:200px;z-index:99999999 !important';
-	},
-	resizeIframeHeight: function(height) {
-		document.getElementById(ContentScript.iframeId).style.height = height;
+		return 'position:fixed;float:right;top:0;right:40px;border: 0;width:80px;height:40px;z-index:99999999 !important';
 	}
 }
 
@@ -67,10 +64,6 @@ chrome.runtime.onMessage.addListener(function(request, sender, callback) {
 			}
 			case "CLOSE_IFRAME" : {
 				ContentScript.removeIframe();
-				return true;
-			}
-			case "RESIZE_HEIGHT_IFRAME" : {
-				ContentScript.resizeIframeHeight(request.height);
 				return true;
 			}
 	  }

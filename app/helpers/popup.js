@@ -44,9 +44,6 @@ window.openLinkNewTab = function (url){
 window.openIframePopup = function (url){
     chrome.runtime.sendMessage( {"command":"OPEN_IFRAME_POPUP"});
 }
-window.resizeIframeHeight = function (height){
-    chrome.runtime.sendMessage( {"command":"RESIZE_HEIGHT_IFRAME", "height": height});
-}
 
 window.closeIframeWindow = function (){
    chrome.runtime.sendMessage( {"command":"CLOSE_IFRAME"});

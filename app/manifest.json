@@ -13,25 +13,23 @@
     "content_scripts": [
         {
             "js": [
-                "static/js/library/jquery-3.2.1.min.js",
+                "static/js/library/jquery.js",
                 "static/js/contentscript.js"
             ],
             "matches": [
-                "*://*/*"
+                "https://*/*"
             ]
         }
     ],
     "background": {
         "scripts": [
-            "static/js/library/jquery-3.2.1.min.js",
+            "static/js/library/jquery.js",
             "config.js",
             "static/js/eventPage.js"
         ]
     },
     "permissions": [
-        "*://*/*",
-        "activeTab",
-        "storage"
+        
     ],
     "icons": {
         "16": "static/images/icon16.png",

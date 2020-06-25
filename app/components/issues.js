@@ -29,7 +29,7 @@ class Issues extends Component {
                 <div className="issueList">
                     <ul>
                         {issueList.map((issue, i) => (
-                            <li>{issue.text}</li>
+                            <li key={i}>{issue.text}</li>
                         ))}
                     </ul>
                 </div>
