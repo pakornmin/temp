@@ -1,12 +1,33 @@
 #bookmark{
-    width: 100%;
-    display: grid;
-    justify-items: end;
-    position: absolute;
-    top: 0;
     cursor: pointer;
 }
 #bookmark img{
-    width: 75px;
-    margin-right: 55px;
+    width: 95px;
+    height: 36px;
+}
+
+#bookmark .issue-container{
+    width: 207px;
+    position: absolute;
+    top: 36px;
+    left: -38px;
+}
+
+#bookmark .issues{
+    background: red;
+    color: #fff;
+    padding: 2px 15px;
+    display: flex;
+}
+
+#bookmark .numberCircle{
+    border-radius: 50%;
+    padding: 2px;
+    border: 1px solid #fff;
+    width: 11px;
+    height: 11px;
+    margin-right: 2px;
+    text-align: center;
+    margin-left: 25px;
+    margin-top: -2px;
 }
