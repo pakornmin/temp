@@ -8,12 +8,12 @@ var Config = {
 	},
 	test: {
 			endpoints : {
-			politicalData: 'https://f7bcc57jc4.execute-api.us-east-2.amazonaws.com/test/politicaldata'
+			politicalData: 'https://api.progressiveshopper.com/sfp/sfpData'
 		}
 	},
 	prod: {
 			endpoints : {
-			politicalData: 'https://ykhbiaf1z7.execute-api.us-east-2.amazonaws.com/prod/politicaldata '
+			politicalData: 'https://api.progressiveshopper.com/sfp/sfpData'
 		}
 	}
 }

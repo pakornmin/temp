@@ -22,9 +22,9 @@ class Footer extends Component {
   }
   
   render() {
-    const brandImage = this.props.home ? 'static/images/brands-selected.png':'static/images/brands.png';
-    const compImage = this.props.similarStory ? 'static/images/competitors-selected.png':'static/images/competitors.png';
-    const actionImage = this.props.action ? 'static/images/actions-selected.png' : 'static/images/actions.png';
+    const brandImage = this.props.home ? 'static/images/brand-selected.png':'static/images/brand.png';
+    const compImage = this.props.similarStory ? 'static/images/competitor-selected.png':'static/images/competitor.png';
+    const actionImage = this.props.action ? 'static/images/action-selected.png' : 'static/images/action.png';
     return (
       <footer>
         <div id="brand-btn" onClick={this.onHomeClick} className={"nav-item "+ (this.props.home ? 'selected' : '')}>
