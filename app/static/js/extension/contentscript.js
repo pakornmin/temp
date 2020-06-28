@@ -8,13 +8,13 @@ const ContentScript = {
 				autoLoad: autoLoad,
 				forceLoad: forceLoad
 			}, 
-			function(loadExtension){
-				if(loadExtension)
-					if(loadExtension.popup){
+			function(response){
+				if(response)
+					if(response.popup){
 						ContentScript.openIframePopup();
 					}
-					else if(loadExtension.ribbon){
-						ContentScript.openIframeRibbon();
+					else if(response.ribbon){
+						ContentScript.openIframeRibbon(response.data);
 					}
 			});
 	},
@@ -23,9 +23,9 @@ const ContentScript = {
 		ContentScript.insertIframe('popup');
 
 	},
-	openIframeRibbon(){
+	openIframeRibbon(data){
 		ContentScript.removeIframe();
-		ContentScript.insertIframe('ribbon');
+		ContentScript.insertIframe('ribbon',data);
 
 	},
 	removeIframe: function(){
@@ -34,18 +34,20 @@ const ContentScript = {
 			 frame.parentNode.removeChild(frame);
 		 }
 	},
-	insertIframe: function(type){
+	insertIframe: function(type, data){
 		var iFrame  = document.createElement ("iframe");
     	iFrame.id = 'shopforcause_iframe';
 		iFrame.src  = chrome.extension.getURL ("index.html?type="+type);
-		iFrame.style.cssText = (type === 'popup'? ContentScript.getPopupIframeStyle() : ContentScript.getRibbonIframeStyle()) ;
+		iFrame.style.cssText = (type === 'popup'? ContentScript.getPopupIframeStyle() : ContentScript.getRibbonIframeStyle(data)) ;
 		document.body.insertBefore (iFrame, document.body.firstChild);
 	},
 	getPopupIframeStyle: function(){
 		return 'position:fixed;top:0;right:0px;display:block;width:360px;height:610px;z-index:99999999 !important;border-width: 1px !important;';
 	},
-	getRibbonIframeStyle: function(){
-		return 'position:fixed;float:right;top:0;right:40px;border: 0;width:95px;height:58px;z-index:99999999 !important';
+	getRibbonIframeStyle: function(data){
+		var hasIssues = data.politicalData.issueList ? data.politicalData.issueList.length > 0 : false;
+		var hw = hasIssues ? 'width:95px;height:58px;':'width:75px;height:35px;';
+		return 'position:fixed;float:right;top:0;right:40px;border: 0;'+hw+'z-index:99999999 !important';
 	}
 }
 

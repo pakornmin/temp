@@ -1,33 +1,31 @@
 #bookmark{
     cursor: pointer;
 }
-#bookmark img{
-    width: 95px;
-    height: 36px;
-}
-
 #bookmark .issue-container{
-    width: 207px;
-    position: absolute;
     top: 36px;
-    left: -38px;
+    left: -23px;
 }
 
 #bookmark .issues{
-    background: red;
-    color: #fff;
-    padding: 2px 15px;
-    display: flex;
+    padding: 2px 0px;
 }
 
 #bookmark .numberCircle{
     border-radius: 50%;
     padding: 2px;
-    border: 1px solid #fff;
     width: 11px;
     height: 11px;
     margin-right: 2px;
-    text-align: center;
     margin-left: 25px;
     margin-top: -2px;
+}
+
+#bookmark .no-issue-ribbon  img{
+    width: 75px;
+    height: 35px;
+}
+
+#bookmark .issue-ribbon  img{
+    width: 95px;
+    height: 36px;
 }

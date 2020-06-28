@@ -32,13 +32,26 @@ class Ribbon extends Component {
     
     return (
        <div id="bookmark" onClick={this.onRibbonButtonClick}>
-         <img src={iconPath} />
+         { issueLength == 0 && 
+          <div class="no-issue-ribbon">
+            <img src={iconPath} /> 
+          </div>
+         }
+        
          {issueLength > 0 &&
+          <div className = "issue-ribbon">
+            <div>
+              <img src={iconPath} /> 
+            </div>
             <div className="issue-container">
               <div className="issues">
-                  <div className="numberCircle"><p className="font11">{issueLength}</p> </div> <div><p className="font11"> {issueLength == 1 ? 'Serious Issue' : 'Serious Issues'}</p></div>
+                  <div className="numberCircle">
+                    <p className="font11">{issueLength}</p> 
+                  </div>
+                  <p className="font11"> {issueLength == 1 ? 'Serious Issue' : 'Serious Issues'}</p>
               </div>
             </div>
+          </div>
          }
          
       </div>

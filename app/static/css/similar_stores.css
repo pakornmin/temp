@@ -41,10 +41,9 @@ h2 {
     cursor: pointer;
 }
 .competitor .brand-logo{
-  width: 50%;
-  height: 60px;
+  width: 80px;
+  height: 70px;
   float: left;
-  display: grid;
   align-items: center;
 }
 

@@ -45,7 +45,7 @@ const Background = {
 			Background.tabWiseData[sender.tab.id] = Background.tabWiseData[sender.tab.id] || {};
 			Background.tabWiseData[sender.tab.id].data = serverData;
 			chrome.pageAction.show(sender.tab.id);
-			sendResponse({'popup': request.forceLoad, 'ribbon':!request.forceLoad});
+			sendResponse({'popup': request.forceLoad, 'ribbon':!request.forceLoad, 'data': serverData});
 			return true;
 		}
 		else {
