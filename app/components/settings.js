@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import 'static/css/common.css';
-import 'static/css/settings.css';
 import analytics from 'helpers/analytics.js'
 class Settings extends Component {
   constructor(props) {

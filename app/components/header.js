@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import 'static/css/common.css';
-import 'static/css/header.css';
 import analytics from 'helpers/analytics.js'
 
 class Header extends Component {
@@ -27,9 +26,8 @@ class Header extends Component {
 
             <div className="close" onClick={this.onCloseButtonClick}>
               <img src="static/images/close.png" alt="Close"  title="Close"/>
-            </div>
+            </div> 
           </header>
-          
     </div>  
     );
   }

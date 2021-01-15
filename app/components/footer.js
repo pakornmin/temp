@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import 'static/css/common.css';
-import 'static/css/nav.css';
 import analytics from 'helpers/analytics.js'
 
 class Footer extends Component {
@@ -8,38 +7,34 @@ class Footer extends Component {
     super(props);
     
   }
-  onHomeClick = ()=>{
+  onHomeClick = (e)=>{
     analytics.sendEvent('HomeTabClicked');
     this.props.showHome();
+    e.preventDefault();
   }
-  onActionClick = ()=>{
+  onActionClick = (e)=>{
     analytics.sendEvent('ActionTabClicked');
     this.props.showAction();
+    e.preventDefault();
   }
-  onSimilarStoryClick = ()=>{
+  onSimilarStoryClick = (e)=>{
     analytics.sendEvent('SimilarStoreTabClicked');
     this.props.showSimilarStory();
+    e.preventDefault();
   }
   
   render() {
-    const brandImage = this.props.home ? 'static/images/brand-selected.png':'static/images/brand.png';
-    const compImage = this.props.similarStory ? 'static/images/competitor-selected.png':'static/images/competitor.png';
-    const actionImage = this.props.action ? 'static/images/action-selected.png' : 'static/images/action.png';
+   
     return (
-      <footer>
-        <div id="brand-btn" onClick={this.onHomeClick} className={"nav-item "+ (this.props.home ? 'selected' : '')}>
-          <img src={brandImage} alt="" id="imgBrand"/>
-          <p>Brand</p>
-        </div>
-        <div id="competitors-btn"  onClick={this.onSimilarStoryClick} className={"nav-item "+ (this.props.similarStory ? 'selected' : '')}>
-          <img src={compImage} alt="" id="imgComp"/>
-          <p>Competitors</p>
-        </div>
-        <div id="actions-btn" onClick={this.onActionClick} className={"nav-item "+ (this.props.action ? 'selected' : '')}>
-          <img src={actionImage} alt="" id="imgAct"/>
-          <p>Action</p>
-        </div>
-      </footer>
+      <div className="header-navigation-wrapper">
+        <nav className="expanded-menu-wrapper" aria-label="Horizontal" role="navigation">
+            <ul className="expanded-menu">
+              <li onClick={this.onHomeClick} id="menu-item-631"  className={"menu-item "+ (this.props.home ? 'current-menu-item' : '')}><a href="#" aria-current="page">BRAND</a></li>
+              <li onClick={this.onSimilarStoryClick} id="menu-item-488"  className={"menu-item "+ (this.props.similarStory ? 'current-menu-item' : '')}><a href="#">ALTERNATES</a></li>
+              <li onClick={this.onActionClick} id="menu-item-490"  className={"menu-item "+ (this.props.action ? 'current-menu-item' : '')}><a href="#">WHAT YOU CAN DO</a></li>
+            </ul>
+        </nav>
+    </div>
     );
   }
 }

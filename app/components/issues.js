@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import 'static/css/issues.css';
+import 'static/css/common.css';
 import analytics from 'helpers/analytics.js'
 import { isNullOrUndefined } from 'util';
 class Issues extends Component {

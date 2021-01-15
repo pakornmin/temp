@@ -35,6 +35,12 @@ class Popup extends Component {
     return (
       <Fragment>
           <Header showSetting={this.showSetting} partnerConfig={data.partnerConfig} />
+          <Footer showHome={this.showHome}  
+            showAction={this.showAction} 
+            showSimilarStory={this.showSimilarStory} 
+            home={this.state.home}
+            action={this.state.action}
+            similarStory={this.state.similarStory} />
           
           {
             (this.state.home || this.state.action || this.state.similarStory || this.state.coupan || this.state.setting) && 
@@ -47,12 +53,7 @@ class Popup extends Component {
               </main>
             )
           }
-          <Footer showHome={this.showHome}  
-            showAction={this.showAction} 
-            showSimilarStory={this.showSimilarStory} 
-            home={this.state.home}
-            action={this.state.action}
-            similarStory={this.state.similarStory} />
+          
       </Fragment>
     );
   }

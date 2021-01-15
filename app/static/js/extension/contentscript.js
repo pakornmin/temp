@@ -42,12 +42,11 @@ const ContentScript = {
 		document.body.insertBefore (iFrame, document.body.firstChild);
 	},
 	getPopupIframeStyle: function(){
-		return 'position:fixed;top:0;right:0px;display:block;width:360px;height:610px;z-index:99999999 !important;border-width: 1px !important;';
+		return 'position:fixed;top:0;right:0px;display:block;width:390px;height:610px;z-index:99999999 !important;border-width: 1px !important;';
 	},
 	getRibbonIframeStyle: function(data){
-		var hasIssues = data.politicalData.issueList ? data.politicalData.issueList.length > 0 : false;
-		var hw = hasIssues ? 'width:95px;height:58px;':'width:75px;height:35px;';
-		return 'position:fixed;float:right;top:0;right:40px;border: 0;'+hw+'z-index:99999999 !important';
+		var hw = 'width:30px;height:30px;';
+		return 'position:fixed;float:right;top:0;right:20px;border: 0;'+hw+'z-index:99999999 !important';
 	}
 }
 

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import 'static/css/common.css';
-import 'static/css/ribbon.css';
 import analytics from 'helpers/analytics.js'
 class Ribbon extends Component {
   constructor(props) {
@@ -18,42 +17,24 @@ class Ribbon extends Component {
 
   render() {
      const shopStatus = this.props.politicalData.shopStatus;
-     const issueLength = this.props.politicalData.issueList ? this.props.politicalData.issueList.length : 0;
      let iconPath = '';
      if(shopStatus === 'NO'){
-      iconPath = "static/images/logo-bad.png";
+      iconPath = "static/images/bad.svg";
      }
      else if(shopStatus === 'OK'){
-      iconPath = "static/images/logo-ok.png";
+      iconPath = "static/images/ok.svg";
      }
      else if(shopStatus === 'YES') {
-      iconPath = "static/images/logo-good.png";
+      iconPath = "static/images/good.svg";
      }
     
     return (
-       <div id="bookmark" onClick={this.onRibbonButtonClick}>
-         { issueLength == 0 && 
-          <div class="no-issue-ribbon">
+       <div className="bookmark" onClick={this.onRibbonButtonClick}>
+         { 
+          <span className="bookmark-icon progressiveshopper-icon progressiveshopper-icon--large">
             <img src={iconPath} /> 
-          </div>
-         }
-        
-         {issueLength > 0 &&
-          <div className = "issue-ribbon">
-            <div>
-              <img src={iconPath} /> 
-            </div>
-            <div className="issue-container">
-              <div className="issues">
-                  <div className="numberCircle">
-                    <p className="font11">{issueLength}</p> 
-                  </div>
-                  <p className="font11"> {issueLength == 1 ? 'Serious Issue' : 'Serious Issues'}</p>
-              </div>
-            </div>
-          </div>
-         }
-         
+          </span>
+         }         
       </div>
     );
   }

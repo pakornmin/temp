@@ -1,14 +1,13 @@
 import React, { Component, Fragment} from 'react';
 import 'static/css/common.css';
-import 'static/css/similar_stores.css';
 import analytics from 'helpers/analytics.js'
 class SimilarStore extends Component {
   constructor(props) {
     super(props);
     this.statusMap = {
-        YES:'good.png',
-        OK:'ok.png',
-        NO:'bad.png'
+        YES:'good.svg',
+        OK:'ok.svg',
+        NO:'bad.svg'
     }
   }
   onCompanyLinkClick(link){
@@ -31,25 +30,36 @@ class SimilarStore extends Component {
     const category = this.props.politicalData.primarySubcategory ? this.props.politicalData.primarySubcategory : this.props.politicalData.subCategory;
     
     return (
-        <section id="competitors">
-            <h2>Other brands within the<br></br>{category} industry</h2>
-            <ul>
-                {similarStores.map((similarStore, i) => (
-                    <Fragment key={i}>
-                        <div className="competitor" onClick={() => this.onCompanyLinkClick(similarStore.affiliateLink)}>
-                            <li>
-                                <div className="brand-logo">
-                                    <img src={`${similarStore.logoUrl}`}/>
-                                </div>
-                               
-                                <div className="status-image">
-                                    <img src={`static/images/${this.statusMap[similarStore.shopStatus]}`} alt="" className="status"/>
-                                </div>
-                            </li>
-                        </div>
-                    </Fragment>
-                ))} 
-            </ul>
+        <section>
+            <div className="similar-stores">
+                <div className="similar-store-heading">
+                    <h2 className="progressiveshopper-item-summary__title">{category} brands</h2>
+                </div>
+                <div className="similar-store-list">
+                    <ul>
+                        {similarStores.map((similarStore, i) => (
+                            <Fragment key={i}>
+                                <li className="progressiveshopper-rating-list"  onClick={() => this.onCompanyLinkClick(similarStore.affiliateLink)}>
+                                    <p className="progressiveshopper-rating">
+                                        <span className="progressiveshopper-icon progressiveshopper-icon--large">
+                                            <img src={`static/images/${this.statusMap[similarStore.shopStatus]}`} />              
+                                        </span> 
+                                        <span className="progressiveshopper-rating-text">
+                                            {similarStore.name}
+                                        </span>
+                                    </p>
+                                </li>
+                            </Fragment>
+                        ))} 
+                    </ul>
+                </div>
+                
+                <div className="wp-block-buttons">
+                    <div className="wp-block-button is-style-primary">
+                        <a className="wp-block-button__link" href={`https://progressiveshopper.com/category/#/${category}`}>Learn More</a>
+                    </div>
+			    </div>
+            </div>
         </section>
     );
   }
