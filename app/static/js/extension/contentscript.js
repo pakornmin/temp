@@ -9,13 +9,18 @@ const ContentScript = {
 				forceLoad: forceLoad
 			}, 
 			function(response){
-				if(response)
+				if(response){
 					if(response.popup){
 						ContentScript.openIframePopup();
+						//console.log(response);
 					}
 					else if(response.ribbon){
+						//console.log(JSON.stringify(response.data));
 						ContentScript.openIframeRibbon(response.data);
+						//console.log(response);
 					}
+				}
+				//console.log(response);	
 			});
 	},
 	openIframePopup(){
@@ -37,12 +42,15 @@ const ContentScript = {
 	insertIframe: function(type, data){
 		var iFrame  = document.createElement ("iframe");
     	iFrame.id = 'shopforcause_iframe';
-		iFrame.src  = chrome.extension.getURL ("index.html?type="+type);
-		iFrame.style.cssText = (type === 'popup'? ContentScript.getPopupIframeStyle() : ContentScript.getRibbonIframeStyle(data)) ;
-		document.body.insertBefore (iFrame, document.body.firstChild);
+		if(type !== "carousel") {
+			iFrame.src  = chrome.runtime.getURL("../../index.html?type="+type);
+			//console.log('wierd');
+			iFrame.style.cssText = (type === 'popup'? ContentScript.getPopupIframeStyle() : ContentScript.getRibbonIframeStyle(data)) ;
+			document.body.insertBefore (iFrame, document.body.firstChild);
+		}
 	},
 	getPopupIframeStyle: function(){
-		return 'position:fixed;top:0;right:0px;display:block;width:390px;height:610px;z-index:99999999 !important;border-width: 1px !important;';
+		return 'position:fixed;top:0;right:0px;display:block;width:390px;height:614px;z-index:99999999 !important;border-width: 1px !important;';
 	},
 	getRibbonIframeStyle: function(data){
 		var hw = 'width:30px;height:30px;';
@@ -65,6 +73,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, callback) {
 			}
 			case "CLOSE_IFRAME" : {
 				ContentScript.removeIframe();
+				ContentScript.openIframeRibbon(request.data);
 				return true;
 			}
 	  }

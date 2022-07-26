@@ -1,13 +1,22 @@
 import React, { Component, Fragment } from 'react';
 import 'static/css/common.css';
-import analytics from 'helpers/analytics.js'
-import { isNullOrUndefined } from 'util';
-class Issues extends Component {
+
+class Issues extends Component {  
   constructor(props) {
         super(props);
-        this.state = {
-            open: false
-        };
+        this.politicalData = this.props.politicalData;;
+        //this.state = {
+        //    open: false
+        //};
+  }
+
+  parseName(name) {
+      let result = name.toLowerCase();
+      result = result.replace('/', '');
+      result = result.replace(/\s/g, '-');
+      //console.log(result);
+    
+      return result + '.svg';
   }
 
   onIssueBoxClick = ()=>{
@@ -15,27 +24,48 @@ class Issues extends Component {
   }
   
   render() {
-    const issueList = this.props.issueList;
+    const issueList = this.props.politicalData.issueList;
     if(!issueList || issueList.length == 0) {
-        return null;
+        return (<section>
+            <div className='issue'> 
+                <div className='issues-heading'>
+                    <h2 className="progressiveshopper-item-summary__title">No Available Information</h2>
+                </div>
+                <div className="issues-list">
+                </div>
+                
+                    
+                <div className="wp-block-buttons">
+                    <div className="wp-block-button is-style-primary">
+                        <a className="wp-block-button__link" href={`https://progressiveshopper.com/brand/#/${this.politicalData.brandDomain}`}>Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </section>);
     }
     return (
-        <div className="issue-container">
-            <div className="issues" onClick={this.onIssueBoxClick}>
-                <div className="numberCircle"> {issueList.length}</div> <div><p> {issueList.length == 1 ? 'SERIOUS ISSUE' : 'SERIOUS ISSUES'}</p></div>
-            </div>
+        <Fragment>
+                <ul>
+                    {issueList.map((issue, i) => (
+                        <Fragment key={i}>
+                            <li className="progressiveshopper-rating-list">
+                                <p className="progressiveshopper-rating">
+                                    <span className="progressiveshopper-icon progressiveshopper-icon--very-large">
+                                        <img src={`static/images/${this.parseName(issue.text)}`} />              
+                                    </span> 
+                                    <span className="progressiveshopper-issue-rating-text">
+                                        {issue.text}
+                                    </span>
+                                </p>
+                            </li>
+                        </Fragment>
+                    ))} 
+                </ul>
             
-            {this.state.open && 
-                <div className="issueList">
-                    <ul>
-                        {issueList.map((issue, i) => (
-                            <li key={i}>{issue.text}</li>
-                        ))}
-                    </ul>
-                </div>
-            }
-        </div>
+            
+        </Fragment>
     );
+
   }
 }
 

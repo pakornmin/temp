@@ -13,32 +13,11 @@ class Extension extends Component {
         this.percentEmployeeToDemocrats = this.politicalData.percentEmployeeToDemocrats;
         this.percentPacToDemocrats = this.politicalData.percentPacToDemocrats;
     }
-    
   }
-  getStyles = ()=>{
-    let styles = {};
-    
-      styles['--overall-contribution'] = `${this.percentTotalDemocrats}% ${100-this.percentTotalDemocrats}%`
-      
-    
-      styles['--employee-contribution'] = `${this.percentEmployeeToDemocrats}% ${100-this.percentEmployeeToDemocrats}%`
-    
-    
-      styles['--pac-contribution'] = `${this.percentPacToDemocrats}% ${100-this.percentPacToDemocrats}%`
-    
-      
-    return styles;
-  }
+
   render() {
     return (
-      <div style={this.getStyles()}>
-        {this.props.carousel && 
-          (
-            <div id="carouselDiv">
-                 <Slider />
-            </div>
-          )
-        }
+      <div>
         {this.props.popup && 
           (
           <div id="pages">

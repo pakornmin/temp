@@ -1,10 +1,14 @@
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga'); // Note: https protocol here
+(function(i,s,o,g,r,a,m){
+    i['GoogleAnalyticsObject']=r;i[r]=i[r] || function(){
+        (i[r].q=i[r].q||[]).push(arguments)
+    }, 
+    i[r].l=1*new Date();
+    a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];
+    a.async=1;
+    a.src=g;
+    m.parentNode.insertBefore(a,m)
+})(window,document,'script','ga.js','ga'); 
 
 ga('create', 'UA-115390690-3', 'auto');
 
@@ -27,6 +31,11 @@ function getParameterByName(name, url) {
 }
 
 chrome.runtime.sendMessage( {"command":'GET_DATA'}, function(data){
+    const type = getParameterByName('type');
+    if(type !== 'popup' && type !== 'ribbon'){
+        console.log('type = nothing?');
+    }
+    console.log('type = ', type);
     entryFunction(data, getParameterByName('type'));
 } );
 
@@ -45,8 +54,8 @@ window.openIframePopup = function (url){
     chrome.runtime.sendMessage( {"command":"OPEN_IFRAME_POPUP"});
 }
 
-window.closeIframeWindow = function (){
-   chrome.runtime.sendMessage( {"command":"CLOSE_IFRAME"});
+window.closeIframeWindow = function (props){
+   chrome.runtime.sendMessage( {"command":"CLOSE_IFRAME", data: props});
 }
 window.setSettingsCheckboxValue = function (checkboxName, value){
    chrome.runtime.sendMessage( {"command":"SET_SETTINGS_CHECKBOX_VALUE", "checkboxName":checkboxName,"value":value});

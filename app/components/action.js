@@ -1,13 +1,23 @@
 import React, { Component } from 'react';
 import '../../app/static/css/common.css';
 import analytics from 'helpers/analytics.js'
+const textStyle = {
+  fontSize: 18, 
+  paddingBottom:0, 
+  textAlign: 'left', 
+  justifyContent: 'center',
+  textAlignVertical: "center" ,
+  alignItems: "center" 
+};
+
+
 class Action extends Component {
   onActionClick(link,label) {
       analytics.sendEvent('Action-'+label+'-Clicked');
       window.openLinkNewTab(link);
   }
   componentDidMount(){
-      analytics.sendEvent( 'ActionPageAppeared');
+      analytics.sendEvent('ActionPageAppeared');
       window.setLastShownTimeActions();
   }
   render() {
@@ -15,16 +25,12 @@ class Action extends Component {
       <div className = "action-section">
         <div className = "actions">
           {this.props.actionList.map((action, i) => (
-            <div className="wp-block-column action-block" onClick={() => this.onActionClick(action.link,action.label)} key={i}>
-              <div className="wp-block-group alignwide progressiveshopper-actions">
-                <div className="wp-block-group__inner-container">
-                    <figure className="wp-block-image size-large progressiveshopper-image-badge is-style-badge">
-                      <img className="action-icon" src={action.imageUrl} alt=""/>
-                    </figure>
-                    <h2>{action.label}</h2>
-                    <p>{action.description}</p>
-                </div>
+            <div onClick={() => this.onActionClick(action.link,action.label)} key={i}>
+              <div style={{display: 'flex'}}>
+                <img src={action.imageUrl} style={{width:'70px', padding:'10px', height:'70px',justifyContent: 'center', textAlignVertical: "center", alignItems: "center"  }}/>
+                <text className='fontStyle' style={textStyle}>{action.label}</text>
               </div>
+              <p>{action.description}</p>
             </div>
           ))}
         </div>

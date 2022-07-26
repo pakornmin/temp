@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import 'static/css/common.css';
 import analytics from 'helpers/analytics.js'
-import Issues from 'components/issues'
+import Accordion from './Accordion';
+import TotalContributon from './TotalContribution';
+import Accordion2 from './Accordion2';
+
 class Home extends Component {
   constructor(props) {
         super(props);
@@ -22,7 +25,11 @@ class Home extends Component {
           OK:'ok.svg',
           NO:'bad.svg'
       }
+
   }
+
+
+
 
   componentDidMount(){
       analytics.sendEvent( 'HomePageAppeared');
@@ -30,77 +37,51 @@ class Home extends Component {
   render() {
     return (
 		    <div className="progressiveshopper-app-container">
-          <div className="progressiveshopper-item-summary">
-            <div className="progressiveshopper-item-summary__header">
-              <div className="progressiveshopper-image-badge">
-                <img src={`${this.politicalData.logoUrl}`}/>
-              </div>
-              <div>
-                <a><h2 className="progressiveshopper-item-summary__title">{this.politicalData.brandDomain}</h2></a>
-              </div>
-            </div>
-          </div>
-          {!!this.totalGiven && 
-            <div>
-              <div className="progressiveshopper-donation-distribution--bar">
-                <div className="progressiveshopper-donation-distribution__heading">POLITICAL DONATIONS</div>
-                <div className="progressiveshopper-donation-distribution__bar progressiveshopper-donation-distribution__bar-democrat">
-                  <span className="progressiveshopper-donation-distribution__democrat" style={{width: `${this.percentTotalDemocrats}%`}}></span>
-                  <span className="progressiveshopper-donation-distribution__label">{this.percentTotalDemocrats}% Democrat</span>
+          <div className='home'>
+            <div className="progressiveshopper-item-summary">
+              <div className="progressiveshopper-item-summary__header">
+                <div className="progressiveshopper-image-badge">
+                  <img src={`${this.politicalData.logoUrl}`}/>
                 </div>
-                <p className="progressiveshopper-rating">
-                  <span className="progressiveshopper-icon progressiveshopper-icon--large">
-                    <img src={`static/images/${this.statusMap[this.politicalData.shopStatus]}`}/>             
-                  </span> 
-                  {this.politicalData.summaryHeadLine}
-                </p>
+                <div>
+                  <a><h2 className="progressiveshopper-item-summary__title">{this.politicalData.brandDomain}</h2></a>
+                </div>
               </div>
-              
-              <ul className={"progressiveshopper-grid-layout "+ (this.isOnlyOneAvailable ? 'donation-distribution-ul' : 'progressiveshopper-grid-layout--mobile-2col')}>
-                {!!this.percentPacToDemocrats && 
-                  <div className="progressiveshopper-donation-distribution--circular">
-                    <div className="VictoryContainer" style={{width: '100%', height: '100%', pointerEvents: 'none', 'touchAction': 'none', position: 'relative'}}>
-                      <img src="static/images/contribution-circle.svg" />     
-                    </div>
-                    <div className="progressiveshopper-donation-distribution__label">PAC Donations</div>
-                    <div className="progressiveshopper-number-stat">
-                      <div className="progressiveshopper-number-stat__label">Democrat</div>
-                      <div className="progressiveshopper-number-stat__number-container">
-                        <span className="progressiveshopper-number-stat__leading-units"></span>
-                        <span className="progressiveshopper-number-stat__number">{this.percentPacToDemocrats}</span>
-                        <span className="progressiveshopper-number-stat__trailing-units">%</span>
-                      </div>
-                    </div>
-                  </div>
-                }
-              
-                {!! this.percentEmployeeToDemocrats && 
-                  <div className="progressiveshopper-donation-distribution--circular">
-                    <div className="VictoryContainer" style={{width: '100%', height: '100%', pointerEvents: 'none', 'touchAction': 'none', position: 'relative'}}>
-                      <img src="static/images/contribution-circle.svg" />     
-                    </div>
-                    <div className="progressiveshopper-donation-distribution__label">Employee Donations</div>
-                    <div className="progressiveshopper-number-stat">
-                      <div className="progressiveshopper-number-stat__label">Democrat</div>
-                      <div className="progressiveshopper-number-stat__number-container">
-                        <span className="progressiveshopper-number-stat__leading-units"></span>
-                        <span className="progressiveshopper-number-stat__number">{this.percentEmployeeToDemocrats}</span>
-                        <span className="progressiveshopper-number-stat__trailing-units">%</span>
-                      </div>
-                    </div>
-                  </div>
-                }
-              </ul>
             </div>
-          }
-          {!this.totalGiven && 
-            <div className="progressiveshopper-donation-distribution__label">No Data Available</div>
-          }
+            <div className='home-detail'>
+              {!!this.totalGiven && 
+                <div>
+                  <TotalContributon 
+                    politicalData={this.politicalData} 
+                    statusMap={this.statusMap}
+                    isOnlyOneAvailable={this.isOnlyOneAvailable}
+                    percentPacToDemocrats={this.percentPacToDemocrats}
+                    percentEmployeeToDemocrats={this.percentEmployeeToDemocrats}/>            
+                <Accordion2 
+                    politicalData={this.politicalData} 
+                    statusMap={this.statusMap}
+                    isOnlyOneAvailable={this.isOnlyOneAvailable}
+                    percentPacToDemocrats={this.percentPacToDemocrats}
+                    percentEmployeeToDemocrats={this.percentEmployeeToDemocrats}/>
+                </div>
+         
+              }
+              {!this.totalGiven && 
+                <div className="progressiveshopper-donation-distribution__label">No Data Available</div>
+              }
+              { this.politicalData.issueList && <Accordion
+                issues={this.props.issues} 
+                politicalData={this.politicalData}
+              />
+              }
+            </div>
+            
+          </div>
           <div className="wp-block-buttons">
-            <div className="wp-block-button is-style-primary" style = {{marginTop: '27px'}}>
-              <a className="wp-block-button__link" href={`https://progressiveshopper.com/brand/#/${this.politicalData.brandDomain}`}>Learn More</a>
+              <div className="wp-block-button is-style-primary" style = {{marginTop: '5px'}}>
+                <a className="wp-block-button__link" href={`https://progressiveshopper.com/brand/#/${this.politicalData.brandDomain}`}>Learn More</a>
+              </div>
             </div>
-				  </div>
         </div>
     );
   }

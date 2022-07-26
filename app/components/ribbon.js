@@ -7,11 +7,12 @@ class Ribbon extends Component {
   }
 
   componentDidMount(){
-      analytics.sendEvent( 'Ribbon Appeared');
+      analytics.sendEvent('Ribbon Appeared');
   }
   
   onRibbonButtonClick  = ()=>{
     analytics.sendEvent('Ribbon Clicked');
+    //console.log('Ribbon clicked');
     window.openIframePopup();
   }
 

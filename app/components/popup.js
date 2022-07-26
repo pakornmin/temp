@@ -6,6 +6,7 @@ import Header from 'components/header';
 import Settings from 'components/settings';
 import Footer from './footer';
 import 'static/css/common.css';
+import Issues from './issues';
 class Popup extends Component {
   constructor(props) {
     super(props);
@@ -13,21 +14,45 @@ class Popup extends Component {
     this.state = {
       home: true, 
       action:false, 
-      similarStory: false, 
-      setting: false 
+      similarStores: false, 
+      setting: false,
     };
   }
   showHome = ()=>{
-    this.setState({home: true, action:false, similarStory: false, setting: false, coupan: false });
+    this.setState({
+      home: true, 
+      action:false, 
+      similarStores: false, 
+      setting: false, 
+      coupan: false, 
+      issues: false });
   }
   showAction = ()=>{
-    this.setState({home: false, action:true, similarStory: false, setting: false, coupan: false });
+    this.setState({
+      home: false, 
+      action:true, 
+      similarStores: false, 
+      setting: false, 
+      coupan: false, 
+      issues: false });
   }
-  showSimilarStory = ()=>{
-    this.setState({home: false, action:false, similarStory: true, setting: false, coupan: false });
+  showSimilarStores = ()=>{
+    this.setState({
+      home: false, 
+      action:false, 
+      similarStores: true, 
+      setting: false, 
+      coupan: false, 
+      issues: false });
   }
   showSetting = ()=>{
-    this.setState({home: false, action:false, similarStory: false, setting: true, coupan: false });
+    this.setState({
+      home: false, 
+      action:false, 
+      similarStores: false, 
+      setting: true, 
+      coupan: false, 
+      issues: false });
   }
   
   render() {
@@ -35,24 +60,29 @@ class Popup extends Component {
     return (
       <Fragment>
           <Header showSetting={this.showSetting} partnerConfig={data.partnerConfig} />
-          <Footer showHome={this.showHome}  
-            showAction={this.showAction} 
-            showSimilarStory={this.showSimilarStory} 
-            home={this.state.home}
-            action={this.state.action}
-            similarStory={this.state.similarStory} />
-          
           {
-            (this.state.home || this.state.action || this.state.similarStory || this.state.coupan || this.state.setting) && 
+            (this.state.home || this.state.action || this.state.similarStores || this.state.coupan || this.state.setting || this.state.issues) && 
             (
               <main>
                  {this.state.setting && <Settings settingsCheckboxValues={data.settingsCheckboxValues} partnerConfig={data.partnerConfig} />}
-                 {this.state.home && <Home politicalData={data.politicalData} merchant={data.merchant} />}
+                 {this.state.home && <Home politicalData={data.politicalData} merchant={data.merchant} issues={data.issues} />}
                  {this.state.action && <Action actionList={data.actionList} />}
-                 {this.state.similarStory && <SimilarStore similarStores={data.similarStoreData} politicalData={data.politicalData} />}
+                 {this.state.similarStores && <SimilarStore similarStores={data.similarStoreData} politicalData={data.politicalData} />}
+                 {this.state.issues && <Issues issues={data.issues} politicalData={data.politicalData} />}
               </main>
             )
           }
+          <Footer showHome={this.showHome}  
+            showAction={this.showAction} 
+            showSimilarStores={this.showSimilarStores} 
+            showIssues = {this.showIssues}
+            home={this.state.home}
+            action={this.state.action}
+            similarStores={this.state.similarStores} 
+            issues = {this.state.issues}
+            />
+          
+          
           
       </Fragment>
     );

@@ -1,3 +1,6 @@
+importScripts('../../config.js');
+
+
 const Background = {
 	tabWiseData: {},
 	redirects: {},
@@ -8,64 +11,84 @@ const Background = {
 		Background.redirects[sender.tab.id] = [];
 		var manifestData = chrome.runtime.getManifest();
 		var postData = {};
+		//console.log(request);
 		postData.url = encodeURIComponent(request.url);
 		postData.autoLoad = request.autoLoad;
 		postData.forceLoad = request.forceLoad;
-		
-		$.ajax({url:Config[Config.env].endpoints.politicalData, 
-			cache: false,
-			data:  JSON.stringify(postData),
-			type:'POST',
-			dataType: 'json',
-			contentType: 'application/json',
-			success: function(data){
-				Background.handlePoliticalDataResponse(data, request, sender, sendResponse);
+
+
+		fetch(Config[Config.env].endpoints.politicalData, {
+			// Adding method type
+			method: "POST",
+			// Adding body or contents to send
+			body: JSON.stringify(postData),
+			headers: {
+				"Content-type": "application/json"
 			}
-		});
+		})
+		// Converting to JSON
+		.then(response => response.json())
+		// Displaying results to console
+		.then(json => Background.handlePoliticalDataResponse(json, request, sender, sendResponse) );
 	},
+	
 	handlePoliticalDataResponse: function(serverData, request, sender, sendResponse){
 		//debugger;
+		console.log('server data', serverData)
+		//console.log(request);
+		//console.log(sender);
+		//console.log(sendResponse);
 		if(serverData && serverData.politicalData && serverData.politicalData.percentTotalDemocrats){
 			const shopStatus = serverData.politicalData.shopStatus;
 			let iconPath = '';
 			if(shopStatus === 'NO'){
-				iconPath = "static/images/bookmark-red.png";
+				iconPath = "../images/bookmark-red.png";
 			}
 			else if(shopStatus === 'OK'){
-				iconPath = "static/images/bookmark-purple.png";
+				iconPath = "../images/bookmark-purple.png";
 			}
 			else if(shopStatus === 'YES') {
-				iconPath = "static/images/bookmark-blue.png";
+				iconPath = "../images/bookmark-blue.png";
 			}
-			chrome.pageAction.setIcon({
+			chrome.action.setIcon({
 				tabId: sender.tab.id,
-				path : iconPath
+				path : {
+					'16': iconPath,
+					'24': iconPath,
+					'32': iconPath
+				}
 			});
-			
-			Background.tabWiseData[sender.tab.id] = Background.tabWiseData[sender.tab.id] || {};
-			Background.tabWiseData[sender.tab.id].data = serverData;
-			chrome.pageAction.show(sender.tab.id);
+			const tab_id = sender.tab.id;
+			//console.log("tab Id: ", tab_id);
+			Background.tabWiseData[tab_id] = Background.tabWiseData[tab_id] || {};
+			Background.tabWiseData[tab_id].data = serverData;
+			//chrome.action.show(sender.tab.id);
 			sendResponse({'popup': request.forceLoad, 'ribbon':!request.forceLoad, 'data': serverData});
 			return true;
 		}
 		else {
-			chrome.pageAction.hide(sender.tab.id);
+			//chrome.action.hide(sender.tab.id);
 		}
 	},
+
+
 	messageListener: function(request, sender, sendResponse){
-	
 		switch(request.command){
 			case "LOAD_POLITICAL_DATA" : {
 				Background.loadPoliticalData(request, sender, sendResponse);
 				return true;
 			}
 			case "GET_DATA" : {
-				
-				if(Background.tabWiseData[sender.tab.id] && Background.tabWiseData[sender.tab.id].data){
-					sendResponse(Background.tabWiseData[sender.tab.id].data);
-					return true;
+				try {
+					if(Background.tabWiseData[sender.tab.id] && Background.tabWiseData[sender.tab.id].data){
+						sendResponse(Background.tabWiseData[sender.tab.id].data);
+						return true;
+					}
 				}
-				return false;
+				catch(err) {
+					return false;
+				}
+				//return false;
 				
 			}
 			case "CLOSE_IFRAME" : {
@@ -93,13 +116,13 @@ const Background = {
 chrome.runtime.onMessage.addListener(Background.messageListener);
 chrome.runtime.onInstalled.addListener(function(details){
     if(details.reason == "install"){
-        let url = chrome.extension.getURL ("index.html?type=carousel");
-	    chrome.tabs.create({active:true , url : url});
+        //let url = chrome.runtime.getURL ("index.html?type=carousel");
+	    //chrome.tabs.create({active:true , url : url});
     }else if(details.reason == "update"){
       
 	}
 });
-chrome.runtime.setUninstallURL('https://progressiveshopper.com/uninstall/');
-chrome.pageAction.onClicked.addListener(function(tab) { 
+//chrome.runtime.setUninstallURL('https://progressiveshopper.com/uninstall/');
+chrome.action.onClicked.addListener(function(tab) { 
 	chrome.tabs.sendMessage(tab.id, {"command":"INVOKE_INIT", autoLoad: false, forceLoad: true});
 });

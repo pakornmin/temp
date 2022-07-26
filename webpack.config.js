@@ -91,6 +91,9 @@ module.exports = {
                 from: 'app/config.js'
             },
             {
+                from: 'app/ga.js'
+            },
+            {
                 from: 'app/static/js/library',
                 to: 'static/js/library'
             }
