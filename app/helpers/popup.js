@@ -32,10 +32,6 @@ function getParameterByName(name, url) {
 
 chrome.runtime.sendMessage( {"command":'GET_DATA'}, function(data){
     const type = getParameterByName('type');
-    if(type !== 'popup' && type !== 'ribbon'){
-        console.log('type = nothing?');
-    }
-    console.log('type = ', type);
     entryFunction(data, getParameterByName('type'));
 } );
 

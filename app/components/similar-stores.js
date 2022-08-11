@@ -26,9 +26,26 @@ class SimilarStore extends Component {
   render() {
    
     const similarStores = this.props.similarStores.filter(store => {
-       return this.props.merchantDomain !== store.brandDomain;
+       return this.props.brandDomain !== store.url;
     });
-    const category = this.props.politicalData.primarySubcategory ? this.props.politicalData.primarySubcategory : this.props.politicalData.subCategory;
+    const similarStoresSorted = [];
+    for(let i = 0; i < similarStores.length; i++) {
+        if(similarStores[i].shopStatus === 'YES') {
+            similarStoresSorted.push(similarStores[i])
+        }
+    }
+    for(let i = 0; i < similarStores.length; i++) {
+        if(similarStores[i].shopStatus === 'OK') {
+            similarStoresSorted.push(similarStores[i])
+        }
+    }
+    for(let i = 0; i < similarStores.length; i++) {
+        if(similarStores[i].shopStatus === 'NO') {
+            similarStoresSorted.push(similarStores[i])
+        }
+    }
+    
+    const category = this.props.category;
     
     return (
         <div className="similar-stores-section">
@@ -38,16 +55,16 @@ class SimilarStore extends Component {
                 </div>
                 <div className="similar-store-list">
                     <ul>
-                        {similarStores.map((similarStore, i) => (
+                        {similarStoresSorted.map((similarStore, i) => (
                             <Fragment key={i}>
-                                <li className="progressiveshopper-rating-list" style = {{padding:10}}onClick={() => this.onCompanyLinkClick(similarStore.affiliateLink)}>
+                                <li className="progressiveshopper-rating-list" style = {{padding:10}}onClick={() => this.onCompanyLinkClick('https://'+similarStore.url)}>
                                     <p className="progressiveshopper-rating">
                                             <img src={`static/images/${this.statusMap[similarStore.shopStatus]}`} width="27"/>              
                                         <span className="progressiveshopper-rating-text" >
                                             &nbsp;&nbsp;&nbsp;
                                         </span>
                                         <span>
-                                            <img className="logo-similar-stores" src={`${similarStore.logoUrl}`} />
+                                            <img className="logo-similar-stores" src={`https://ps-logos.s3.us-east-2.amazonaws.com/${similarStore.iconPath}`} />
                                         </span>
                                         
                                     </p>

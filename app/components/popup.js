@@ -56,7 +56,7 @@ class Popup extends Component {
   }
   
   render() {
-    let data = this.props.data;
+    const data = this.props.data;
     return (
       <Fragment>
           <Header showSetting={this.showSetting} partnerConfig={data.partnerConfig} />
@@ -65,9 +65,17 @@ class Popup extends Component {
             (
               <main>
                  {this.state.setting && <Settings settingsCheckboxValues={data.settingsCheckboxValues} partnerConfig={data.partnerConfig} />}
-                 {this.state.home && <Home politicalData={data.politicalData} merchant={data.merchant} issues={data.issues} />}
+                 {this.state.home && <Home politicalData={data.politicalData} 
+                                          brandDomain={data.url} 
+                                          iconPath={data.iconPath} 
+                                          issueList={data.issueList} 
+                                          shopStatus={data.shopStatus} 
+                                          name={data.name}/>}
                  {this.state.action && <Action actionList={data.actionList} />}
-                 {this.state.similarStores && <SimilarStore similarStores={data.similarStoreData} politicalData={data.politicalData} />}
+                 {this.state.similarStores && <SimilarStore similarStores={data.similarStores} 
+                                                            politicalData={data.politicalData} 
+                                                            brandDomain={data.url} 
+                                                            category={data.category}/>}
                  {this.state.issues && <Issues issues={data.issues} politicalData={data.politicalData} />}
               </main>
             )

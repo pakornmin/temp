@@ -9,16 +9,21 @@ class Home extends Component {
   constructor(props) {
         super(props);
         this.politicalData = this.props.politicalData;
+        this.brandDomain = this.props.brandDomain;
+        this.name = this.props.name; 
+        this.iconPath = 'https://ps-logos.s3.us-east-2.amazonaws.com/' + this.props.iconPath;
+        this.shopStatus = this.props.shopStatus;
 
         this.percentTotalDemocrats = this.politicalData.percentTotalDemocrats;
         this.percentEmployeeToDemocrats = this.politicalData.percentEmployeeToDemocrats;
-        this.percentPacToDemocrats = this.politicalData.percentPacToDemocrats;
+        this.percentPACToDemocrats = this.politicalData.percentPACToDemocrats;
 
-        this.pacTotalGiven = this.politicalData.pacTotalGiven;
-        this.employeeTotalGiven = this.politicalData.employeeTotalGiven;
-        this.totalGiven = this.politicalData.totalGiven;
+        this.pacTotalGiven = this.politicalData.totalPAC;
+        this.employeeTotalGiven = this.politicalData.totalEmployee;
+        this.totalGiven = this.politicalData.total;
 
-        this.isOnlyOneAvailable = (this.pacTotalGiven && !this.employeeTotalGiven) || (!this.pacTotalGiven && this.employeeTotalGiven);
+        this.isOnlyOneAvailable = (this.pacTotalGiven == this.totalGiven) || (this.employeeTotalGiven == this.totalGiven);
+        //console.log('only one available: ', this.isOnlyOneAvailable);
 
         this.statusMap = {
           YES:'good.svg',
@@ -35,16 +40,17 @@ class Home extends Component {
       analytics.sendEvent( 'HomePageAppeared');
   } 
   render() {
+    
     return (
 		    <div className="progressiveshopper-app-container">
           <div className='home'>
             <div className="progressiveshopper-item-summary">
               <div className="progressiveshopper-item-summary__header">
                 <div className="progressiveshopper-image-badge">
-                  <img src={`${this.politicalData.logoUrl}`}/>
+                  <img src={`${this.iconPath}`}/>
                 </div>
                 <div>
-                  <a><h2 className="progressiveshopper-item-summary__title">{this.politicalData.brandDomain}</h2></a>
+                  <a><h2 className="progressiveshopper-item-summary__title">{this.name}</h2></a>
                 </div>
               </div>
             </div>
@@ -60,8 +66,9 @@ class Home extends Component {
                 <Accordion2 
                     politicalData={this.politicalData} 
                     statusMap={this.statusMap}
+                    shopStatus={this.shopStatus}
                     isOnlyOneAvailable={this.isOnlyOneAvailable}
-                    percentPacToDemocrats={this.percentPacToDemocrats}
+                    percentPACToDemocrats={this.percentPACToDemocrats}
                     percentEmployeeToDemocrats={this.percentEmployeeToDemocrats}/>
                 </div>
          
@@ -69,10 +76,12 @@ class Home extends Component {
               {!this.totalGiven && 
                 <div className="progressiveshopper-donation-distribution__label">No Data Available</div>
               }
-              { this.politicalData.issueList && <Accordion
-                issues={this.props.issues} 
+              { this.props.issueList && <Accordion
+                name={this.props.name}
+                brandDomain = {this.brandDomain}
+                issueList={this.props.issueList} 
                 politicalData={this.politicalData}
-              />
+              /> 
               }
             </div>
             

@@ -6,40 +6,44 @@ const Background = {
 	redirects: {},
 
 //do time validation here for all ribbons, make time related code common, pass indication to load data
-	loadPoliticalData: function (request, sender, sendResponse){
+	loadPoliticalData: async function(request, sender, sendResponse){
 		var redirectArray = Background.redirects[sender.tab.id];
 		Background.redirects[sender.tab.id] = [];
 		var manifestData = chrome.runtime.getManifest();
 		var postData = {};
-		//console.log(request);
+		
 		postData.url = encodeURIComponent(request.url);
 		postData.autoLoad = request.autoLoad;
 		postData.forceLoad = request.forceLoad;
 
-
-		fetch(Config[Config.env].endpoints.politicalData, {
+		const endpoint = Config[Config.env].endpoints.politicalData + request.host;
+		
+		const response = await fetch(endpoint, {
 			// Adding method type
-			method: "POST",
-			// Adding body or contents to send
-			body: JSON.stringify(postData),
-			headers: {
-				"Content-type": "application/json"
-			}
-		})
-		// Converting to JSON
-		.then(response => response.json())
-		// Displaying results to console
-		.then(json => Background.handlePoliticalDataResponse(json, request, sender, sendResponse) );
+			method: "GET"
+		});
+		
+		const jsonResponse =  await response.json();
+		Background.handlePoliticalDataResponse(jsonResponse, request, sender, sendResponse);
 	},
 	
-	handlePoliticalDataResponse: function(serverData, request, sender, sendResponse){
-		//debugger;
-		console.log('server data', serverData)
-		//console.log(request);
-		//console.log(sender);
-		//console.log(sendResponse);
-		if(serverData && serverData.politicalData && serverData.politicalData.percentTotalDemocrats){
-			const shopStatus = serverData.politicalData.shopStatus;
+	handlePoliticalDataResponse: async function(serverData, request, sender, sendResponse){
+		//debugger
+
+		if(serverData && serverData.politicalData){
+
+			const percentDemocrat = serverData.politicalData.totalDemocrat / serverData.politicalData.total;
+			const numIssue = serverData.issueList.length;
+			let shopStatus = '';
+			if(percentDemocrat >= 0.6 && numIssue == 0) {
+				shopStatus = 'YES';
+			} else if(	(percentDemocrat >= 0.4 && percentDemocrat <= 0.6) || 
+						(percentDemocrat > 0.6 && numIssue != 0)) {
+				shopStatus = 'OK';
+			} else {
+				shopStatus = 'NO';
+			}
+
 			let iconPath = '';
 			if(shopStatus === 'NO'){
 				iconPath = "../images/bookmark-red.png";
@@ -59,11 +63,28 @@ const Background = {
 				}
 			});
 			const tab_id = sender.tab.id;
-			//console.log("tab Id: ", tab_id);
 			Background.tabWiseData[tab_id] = Background.tabWiseData[tab_id] || {};
 			Background.tabWiseData[tab_id].data = serverData;
-			//chrome.action.show(sender.tab.id);
-			sendResponse({'popup': request.forceLoad, 'ribbon':!request.forceLoad, 'data': serverData});
+			serverData.shopStatus = shopStatus;
+			const similarStoresEndpoint = Config[Config.env].endpoints.category + serverData.category;
+			
+			const similarStores = await fetch(similarStoresEndpoint, {
+				// Adding method type
+				method: "GET"
+			});
+			const actionListEndpoint = Config[Config.env].endpoints.actions;
+			
+			const actionList = await fetch(actionListEndpoint, {
+				// Adding method type
+				method: "GET"
+			});
+			const similarStoresJson = await similarStores.json();
+			
+			const actionListJson = await actionList.json();
+			serverData.similarStores = similarStoresJson;
+			serverData.actionList = actionListJson;
+			
+			await sendResponse({'popup': request.forceLoad, 'ribbon':!request.forceLoad, 'data': serverData});
 			return true;
 		}
 		else {

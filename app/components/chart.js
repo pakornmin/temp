@@ -3,11 +3,11 @@ import { Fragment } from "react/cjs/react.production.min";
 
 const ContributionChart = (props) => {
 
-    //console.log(props);
+    
 
     const placeHolder = (100-props.percent)*235.62 / 100;
     const finalAttribute = placeHolder + ' 235.62';
-    //console.log(finalAttribute);
+    
 
     
     return ( 

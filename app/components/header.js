@@ -13,7 +13,7 @@ class Header extends Component {
 
   onCloseButtonClick  = ()=>{
       analytics.sendEvent('PopupCloseClicked');
-      //console.log('Close clicked');
+      
       window.closeIframeWindow(this.props);
   }
 

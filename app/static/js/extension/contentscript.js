@@ -12,15 +12,12 @@ const ContentScript = {
 				if(response){
 					if(response.popup){
 						ContentScript.openIframePopup();
-						//console.log(response);
 					}
 					else if(response.ribbon){
-						//console.log(JSON.stringify(response.data));
 						ContentScript.openIframeRibbon(response.data);
-						//console.log(response);
+						
 					}
 				}
-				//console.log(response);	
 			});
 	},
 	openIframePopup(){
@@ -44,7 +41,6 @@ const ContentScript = {
     	iFrame.id = 'shopforcause_iframe';
 		if(type !== "carousel") {
 			iFrame.src  = chrome.runtime.getURL("../../index.html?type="+type);
-			//console.log('wierd');
 			iFrame.style.cssText = (type === 'popup'? ContentScript.getPopupIframeStyle() : ContentScript.getRibbonIframeStyle(data)) ;
 			document.body.insertBefore (iFrame, document.body.firstChild);
 		}

@@ -4,7 +4,6 @@ import 'static/css/common.css';
 class Issues extends Component {  
   constructor(props) {
         super(props);
-        this.politicalData = this.props.politicalData;;
         //this.state = {
         //    open: false
         //};
@@ -14,7 +13,7 @@ class Issues extends Component {
       let result = name.toLowerCase();
       result = result.replace('/', '');
       result = result.replace(/\s/g, '-');
-      //console.log(result);
+      
     
       return result + '.svg';
   }
@@ -24,7 +23,8 @@ class Issues extends Component {
   }
   
   render() {
-    const issueList = this.props.politicalData.issueList;
+    const issueList = this.props.issueList;
+    const brandDomain = this.props.brandDomain;
     if(!issueList || issueList.length == 0) {
         return (<section>
             <div className='issue'> 
@@ -37,7 +37,7 @@ class Issues extends Component {
                     
                 <div className="wp-block-buttons">
                     <div className="wp-block-button is-style-primary">
-                        <a className="wp-block-button__link" href={`https://progressiveshopper.com/brand/#/${this.politicalData.brandDomain}`}>Learn More</a>
+                        <a className="wp-block-button__link" href={`https://progressiveshopper.com/brand/#/${brandDomain}`}>Learn More</a>
                     </div>
                 </div>
             </div>

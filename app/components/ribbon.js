@@ -4,6 +4,7 @@ import analytics from 'helpers/analytics.js'
 class Ribbon extends Component {
   constructor(props) {
     super(props);
+    
   }
 
   componentDidMount(){
@@ -12,12 +13,11 @@ class Ribbon extends Component {
   
   onRibbonButtonClick  = ()=>{
     analytics.sendEvent('Ribbon Clicked');
-    //console.log('Ribbon clicked');
     window.openIframePopup();
   }
 
   render() {
-     const shopStatus = this.props.politicalData.shopStatus;
+     const shopStatus = this.props.shopStatus;
      let iconPath = '';
      if(shopStatus === 'NO'){
       iconPath = "static/images/bad.svg";

@@ -28,9 +28,9 @@ function Accordion2(props) {
         <div>
         <p className="progressiveshopper-rating">
                 <span className="progressiveshopper-icon progressiveshopper-icon--large">
-                    <img src={`static/images/${props.statusMap[props.politicalData.shopStatus]}`}/>           
+                    <img src={`static/images/${props.statusMap[props.shopStatus]}`}/>           
                 </span> 
-                {props.politicalData.summaryHeadLine}
+                {props.politicalData.recomendation}
             <Chevron className={`${setRotate}`} width={15} fill={"#777"} />
         </p>
         </div>
@@ -44,7 +44,7 @@ function Accordion2(props) {
                   politicalData={props.politicalData} 
                   statusMap={props.statusMap}
                   isOnlyOneAvailable={props.isOnlyOneAvailable}
-                  percentPacToDemocrats={props.percentPacToDemocrats}
+                  percentPacToDemocrats={props.percentPACToDemocrats}
                   percentEmployeeToDemocrats={props.percentEmployeeToDemocrats}/>
       </div>
     </div>

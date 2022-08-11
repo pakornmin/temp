@@ -9,9 +9,24 @@ class Extension extends Component {
     super(props);
     this.politicalData = this.props.data ? this.props.data.politicalData : null;
     if(this.politicalData){
-        this.percentTotalDemocrats = this.politicalData.percentTotalDemocrats;
-        this.percentEmployeeToDemocrats = this.politicalData.percentEmployeeToDemocrats;
-        this.percentPacToDemocrats = this.politicalData.percentPacToDemocrats;
+        if(this.politicalData.total != 0) {
+          this.politicalData.percentTotalDemocrats = parseInt(this.politicalData.totalDemocrat/this.politicalData.total * 100);
+        } else {
+          this.politicalData.percentTotalDemocrats = null;
+        }
+        if(this.politicalData.totalEmployee != 0) {
+          this.politicalData.percentEmployeeToDemocrats = parseInt(this.politicalData.democratEmployee/this.politicalData.totalEmployee * 100);
+        } else {
+          this.politicalData.percentEmployeeToDemocrats = null;
+        }
+        if(this.politicalData.totalPAC != 0) {
+          this.politicalData.percentPACToDemocrats = parseInt(this.politicalData.democratPAC/this.politicalData.totalPAC * 100);
+        } else {
+          this.politicalData.percentPACToDemocrats = null;
+        }
+
+        this.shopStatus = this.props.data.shopStatus;
+        
     }
   }
 
@@ -27,7 +42,7 @@ class Extension extends Component {
         }
         {this.props.ribbon && 
           (
-          <Ribbon politicalData={this.props.data.politicalData}/>
+          <Ribbon shopStatus={this.shopStatus}/>
           )
         }
       </div>

@@ -21,11 +21,12 @@ function Accordion(props) {
     );
   }
 
+
   return (
     <div className="accordion__section">
       <button className={`accordion ${setActive}`} onClick={toggleAccordion}>
         <div className="accordion__title">
-            {props.politicalData.name} Has {props.politicalData.issueList.length} Serious Issues
+            {props.name} Has {props.issueList.length} Serious Issues
             <Chevron className={`${setRotate}`} width={15} fill={"#777"} />
         </div>
         
@@ -34,7 +35,7 @@ function Accordion(props) {
         ref={content}
         style={{ maxHeight: `${setHeight}` }}
         className="accordion__content">
-            <Issues issues={props.issues} politicalData={props.politicalData} />
+            <Issues issueList={props.issueList} />
       </div>
     </div>
   );
